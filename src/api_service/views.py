@@ -36,3 +36,10 @@ class CarUpdateAPIView(generics.UpdateAPIView):
     serializer_class = CarSerializer
     lookup_field = 'id'
     lookup_url_kwarg = 'car_id'
+
+
+class CargoDeleteAPIView(generics.DestroyAPIView):
+    queryset = Cargo.objects.all()
+    serializer_class = CargoSerializer
+    lookup_field = 'id'
+    lookup_url_kwarg = 'cargo_id'
