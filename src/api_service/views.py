@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from rest_framework import generics
 
-# Create your views here.
+from api_service.models import Cargo
+from api_service.serializers import CargoSerializer
+
+
+class CargoListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Cargo.objects.all()
+    serializer_class = CargoSerializer
