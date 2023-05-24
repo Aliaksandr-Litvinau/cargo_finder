@@ -96,6 +96,18 @@ class CargoDetailSerializer(serializers.ModelSerializer):
         fields = ['id', 'pick_up_location', 'delivery_location', 'weight', 'description', 'cars']
 
 
+class CargoUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cargo
+        fields = ['weight', 'description']
+
+    def update(self, instance, validated_data):
+        instance.weight = validated_data.get('weight', instance.weight)
+        instance.description = validated_data.get('description', instance.description)
+        instance.save()
+        return instance
+
+
 class CarSerializer(serializers.ModelSerializer):
     zip_code = serializers.CharField(max_length=10, write_only=True)
 
