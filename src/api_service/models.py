@@ -5,9 +5,9 @@ from django.db import models
 class Location(models.Model):
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
-    zip_code = models.CharField(max_length=10)
-    latitude = models.DecimalField(max_digits=9, decimal_places=6)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6)
+    zip_code = models.CharField(max_length=10, db_index=True)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, db_index=True)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, db_index=True)
 
     def __str__(self):
         return f"{self.city}, {self.state} {self.zip_code}"
@@ -32,7 +32,8 @@ class Car(models.Model):
     unique_number = models.CharField(
         max_length=5,
         unique=True,
-        validators=[unique_number_validator]
+        validators=[unique_number_validator],
+        db_index=True
     )
     current_location = models.ForeignKey(Location, on_delete=models.CASCADE)
     carrying_capacity = models.PositiveIntegerField(validators=[MinValueValidator(1), MaxValueValidator(1000)])
