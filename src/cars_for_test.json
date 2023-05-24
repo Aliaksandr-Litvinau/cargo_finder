@@ -1,0 +1,102 @@
+[
+  {
+    "unique_number": "1234A",
+    "current_location": 1,
+    "carrying_capacity": 500
+  },
+  {
+    "unique_number": "2345B",
+    "current_location": 26761,
+    "carrying_capacity": 750
+  },
+  {
+    "unique_number": "3456C",
+    "current_location": 30653,
+    "carrying_capacity": 600
+  },
+  {
+    "unique_number": "4567D",
+    "current_location": 23220,
+    "carrying_capacity": 900
+  },
+  {
+    "unique_number": "5678E",
+    "current_location": 25745,
+    "carrying_capacity": 400
+  },
+  {
+    "unique_number": "6789F",
+    "current_location": 19118,
+    "carrying_capacity": 800
+  },
+  {
+    "unique_number": "7890G",
+    "current_location": 7,
+    "carrying_capacity": 550
+  },
+  {
+    "unique_number": "8901H",
+    "current_location": 22198,
+    "carrying_capacity": 700
+  },
+  {
+    "unique_number": "9012I",
+    "current_location": 12149,
+    "carrying_capacity": 950
+  },
+  {
+    "unique_number": "0123J",
+    "current_location": 7604,
+    "carrying_capacity": 300
+  },
+  {
+    "unique_number": "1111K",
+    "current_location": 20256,
+    "carrying_capacity": 650
+  },
+  {
+    "unique_number": "2222L",
+    "current_location": 32165,
+    "carrying_capacity": 750
+  },
+  {
+    "unique_number": "3333M",
+    "current_location": 15993,
+    "carrying_capacity": 500
+  },
+  {
+    "unique_number": "4444N",
+    "current_location": 14,
+    "carrying_capacity": 800
+  },
+  {
+    "unique_number": "5555O",
+    "current_location": 10403,
+    "carrying_capacity": 700
+  },
+  {
+    "unique_number": "6666P",
+    "current_location": 15038,
+    "carrying_capacity": 450
+  },
+  {
+    "unique_number": "7777Q",
+    "current_location": 17,
+    "carrying_capacity": 900
+  },
+  {
+    "unique_number": "8888R",
+    "current_location": 22750,
+    "carrying_capacity": 550
+  },
+  {
+    "unique_number": "9999S",
+    "current_location": 29592,
+    "carrying_capacity": 600
+  },
+  {
+    "unique_number": "0000T",
+    "current_location": 33031,
+    "carrying_capacity": 750
+  }
+]
