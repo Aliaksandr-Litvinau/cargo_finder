@@ -7,9 +7,9 @@ postgres: ## Run postgres
                   --restart always \
                   postgres:13;
 
-#redis:
-#	@docker run --name сargo_finder_redis \
-#                -p 6379:6379 \
-#                -d redis;
+redis:
+	@docker run --name finder_redis \
+                -p 6379:6379 \
+                -d redis;
 
 

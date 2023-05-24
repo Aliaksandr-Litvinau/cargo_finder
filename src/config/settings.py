@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 
 import dj_database_url
+from celery.schedules import crontab
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,6 +43,8 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'drf_spectacular',
+    'django_celery_results',
+    'django_celery_beat',
 
     'api_service.apps.ApiServiceConfig',
 ]
@@ -128,3 +131,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
+CELERY_RESULT_BACKEND = 'django-db'
+
+CELERY_BEAT_SCHEDULE = {
+    '': {
+        'task': 'api_client.tasks.',
+        'schedule': crontab('0', '*', '*', '*', '*'),
+    },
+}
