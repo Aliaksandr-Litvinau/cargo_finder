@@ -49,6 +49,7 @@ class CargoListSerializer(serializers.ModelSerializer):
 
         for car_location in car_locations:
             car_distance = distance(cargo_location, car_location).miles
+
             if car_distance <= 450:
                 nearest_car_count += 1
 
@@ -79,6 +80,7 @@ class CargoDetailSerializer(serializers.ModelSerializer):
         cargo_location = (cargo.pick_up_location.latitude, cargo.pick_up_location.longitude)
         all_cars = Car.objects.all()
         car_distances = []
+
         for car in all_cars:
             car_location = (car.current_location.latitude, car.current_location.longitude)
             car_distance = distance(cargo_location, car_location).miles
@@ -86,8 +88,29 @@ class CargoDetailSerializer(serializers.ModelSerializer):
                 'unique_number': car.unique_number,
                 'distance_to_cargo': car_distance
             })
+
         return car_distances
 
     class Meta:
         model = Cargo
         fields = ['id', 'pick_up_location', 'delivery_location', 'weight', 'description', 'cars']
+
+
+class CarSerializer(serializers.ModelSerializer):
+    zip_code = serializers.CharField(max_length=10, write_only=True)
+
+    class Meta:
+        model = Car
+        fields = ['unique_number', 'carrying_capacity', 'zip_code']
+
+    def update(self, instance, validated_data):
+        zip_code = validated_data.pop('zip_code')
+        location = Location.objects.filter(zip_code=zip_code).first()
+
+        if not location:
+            raise serializers.ValidationError({'error': 'Invalid zip_code'})
+
+        instance.current_location = location
+        instance.save()
+
+        return instance
