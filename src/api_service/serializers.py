@@ -1,7 +1,7 @@
 from geopy.distance import distance
 from rest_framework import serializers
 
-from api_service.models import Cargo, Location
+from api_service.models import Cargo, Location, Car
 
 
 class CargoSerializer(serializers.ModelSerializer):
@@ -57,3 +57,37 @@ class CargoListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cargo
         fields = ['pick_up_location', 'delivery_location', 'nearest_car_count']
+
+
+class CargoDetailSerializer(serializers.ModelSerializer):
+    pick_up_location = serializers.SerializerMethodField()
+    delivery_location = serializers.SerializerMethodField()
+    weight = serializers.IntegerField()
+    description = serializers.CharField()
+    cars = serializers.SerializerMethodField()
+
+    @staticmethod
+    def get_pick_up_location(cargo):
+        return cargo.pick_up_location.zip_code
+
+    @staticmethod
+    def get_delivery_location(cargo):
+        return cargo.delivery_location.zip_code
+
+    @staticmethod
+    def get_cars(cargo):
+        cargo_location = (cargo.pick_up_location.latitude, cargo.pick_up_location.longitude)
+        all_cars = Car.objects.all()
+        car_distances = []
+        for car in all_cars:
+            car_location = (car.current_location.latitude, car.current_location.longitude)
+            car_distance = distance(cargo_location, car_location).miles
+            car_distances.append({
+                'unique_number': car.unique_number,
+                'distance_to_cargo': car_distance
+            })
+        return car_distances
+
+    class Meta:
+        model = Cargo
+        fields = ['id', 'pick_up_location', 'delivery_location', 'weight', 'description', 'cars']
